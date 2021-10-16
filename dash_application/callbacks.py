@@ -1,10 +1,10 @@
-from flask import current_app
+import base64
 from dash import dcc
 from dash import html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import plotly.express as px
-
+from .layout import content
 
 from dash_application.data import movility_data
 
@@ -27,20 +27,21 @@ def bar_fig(dataframe, X, Y,color_by_column,  title):
 
 
 
+
 def register_callback(dash_app):
 
     @dash_app.callback(Output("page-content", "children"), [Input("url", "pathname")])
     def render_page_content(pathname):
         if pathname == "/":
-            return html.P('Aca va la descripcion del proyecto')
+            return html.H2(['Aca va la descripcion del proyecto',html.Hr()])
         elif pathname == "/bicicletas":
-            return html.P(["Este grafico muestra la utilizacion del medio de transporte BICICLETA durante el año 2020", dcc.Graph(id='example-graph',figure=bar_fig(df_bici,'MES','TOTAL', 'MES', 'Viajes Bicicleta 2020'))], className="img-fluid")
+            return html.H2(["Utilizacion del medio de transporte BICICLETA durante el año 2020",html.Hr(),dcc.Graph(id='example-graph',figure=bar_fig(df_bici,'MES','TOTAL', 'MES', 'Viajes Bicicleta 2020'))], className="text-left")
         elif pathname == "/subte":
             return html.P(["Este grafico muestra la utilizacion del medio de transporte SUBTE durante el año 2020", dcc.Graph(id='example-graph1',figure=bar_fig(df_subtes,'MES','TOTAL', 'MES', 'Viajes SUBTE 2020'))], className="img-fluid")
         elif pathname == "/vehiculos":
             return html.P(["Este grafico muestra la utilizacion de VEHICULOS durante el año 2020", dcc.Graph(id='example-graph2',figure=bar_fig(df_vehiculos,'MES','TOTAL', 'MES', 'Viajes VEHICULOS 2020'))], className="img-fluid")
         elif pathname == '/contaminantes':
-            return None
+            return content.children
         # If the user tries to reach a different page, return a 404 message
         return dbc.Jumbotron(
             [

@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_caching import Cache
+from flask_bootstrap import Bootstrap
 from config import config
 from dash import Dash
 import dash_bootstrap_components as dbc
@@ -9,6 +10,7 @@ import dash_bootstrap_components as dbc
 
 db = SQLAlchemy()
 cache = Cache()
+bootstrap = Bootstrap()
 
 class CreateApp():
 
@@ -20,7 +22,7 @@ class CreateApp():
         app.config.from_object(config[config_name])
         db.init_app(app)
         cache.init_app(app)
-
+        bootstrap.init_app(app)
         
         from dash_application.callbacks import register_callback as dash_callback
         from dash_application.layout import layout as dash_layout

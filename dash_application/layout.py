@@ -9,6 +9,9 @@ image_filename = "dash_application/assets/logo_corto.png"
 encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 
+image_opendata = "dash_application/assets/research_analytics.jpg"
+encoded_opendata = base64.b64encode(open(image_opendata, 'rb').read())
+
 # the style arguments for the sidebar. We use position:fixed and a fixed width
 SIDEBAR_STYLE = {
     "position": "fixed",
@@ -29,6 +32,11 @@ CONTENT_STYLE = {
     "padding": "2rem 1rem",
 }
 
+CARD_TEXT_STYLE = {
+    'textAlign': 'center',
+    'color': '#0074D9'
+}
+
 sidebar = html.Div(
     [
         html.H2([html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode()))], className="rounded mx-auto d-block"),
@@ -43,6 +51,8 @@ sidebar = html.Div(
                 dbc.NavLink("Subtes", href="/subte", active="exact"),
                 dbc.NavLink("Vehiculos", href="/vehiculos", active="exact"),
                 dbc.NavLink("Contaminantes", href="/contaminantes", active="exact"),
+                
+                html.Img(src='data:image/png;base64,{}'.format(encoded_opendata.decode()), className="img-responsive", style={'position':'absolute','bottom':0})
             ],
             vertical=True,
             pills=True,
@@ -51,10 +61,76 @@ sidebar = html.Div(
     style=SIDEBAR_STYLE,
 )
 
+content_first_row = dbc.Row([
+    dbc.Col(
+        dbc.Card(
+            [
+
+                dbc.CardBody(
+                    [
+                        html.H4(id='card_title_1', children=['Card Title 1'], className='card-title',
+                                style=CARD_TEXT_STYLE),
+                        html.P( id='card_text_1', children=['Sample text.'], style=CARD_TEXT_STYLE),
+                    ]
+                )
+            ]
+        ),
+        md=3
+    ),
+    dbc.Col(
+        dbc.Card(
+            [
+
+                dbc.CardBody(
+                    [
+                        html.H4('Card Title 2', className='card-title', style=CARD_TEXT_STYLE),
+                        html.P('Sample text.', style=CARD_TEXT_STYLE),
+                    ]
+                ),
+            ]
+
+        ),
+        md=3
+    ),
+    dbc.Col(
+        dbc.Card(
+            [
+                dbc.CardBody(
+                    [
+                        html.H4('Card Title 3', className='card-title', style=CARD_TEXT_STYLE),
+                        html.P('Sample text.', style=CARD_TEXT_STYLE),
+                    ]
+                ),
+            ]
+
+        ),
+        md=3
+    ),
+    dbc.Col(
+        dbc.Card(
+            [
+                dbc.CardBody(
+                    [
+                        html.H4('Card Title 4', className='card-title', style=CARD_TEXT_STYLE),
+                        html.P('Sample text.', style=CARD_TEXT_STYLE),
+                    ]
+                ),
+            ]
+        ),
+        md=3
+    ),
+    dbc.Col(
+        dcc.Graph(
+            id='example-graph4',figure={}
+        ),
+        width={'size': 5}
+    )
+])
 
 
+a = [html.H2('Analytics Dashboard Template'),html.Hr(),content_first_row]
 
-content = html.Div(id="page-content", style=CONTENT_STYLE)
+content = html.Div(a, id="page-content", style=CONTENT_STYLE)
 
 
 layout = html.Div([dcc.Location(id="url"),sidebar, content])

@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  
+  # Flask api app
+  app:
+    build: .
+    volumes: 
+      - .:/app-proyecto
+    ports: 
+      - 5000:80
+    container_name: flask_app
+    command: flask run --host=0.0.0.0 --port=80
+    
+
+
+volumes:
+  .:

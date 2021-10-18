@@ -7,7 +7,7 @@ from config import config
 from dash import Dash
 import dash_bootstrap_components as dbc
 import logging
-
+import os
 
 db = SQLAlchemy()
 cache = Cache()
@@ -56,7 +56,7 @@ def register_dash_app(flask_server, title, base_pathname, layout, register_callb
         __name__,
         server=flask_server,
         url_base_pathname=base_pathname,
-        assets_folder=r'C:\Users\Lucia Zabaleta\app-proyecto-final-eant\dash_application\assets',
+        assets_folder=  os.path.join(os.path.abspath('..'), 'dash_application','assets'),
         meta_tags=[meta_viewport],
         external_stylesheets=[dbc.themes.FLATLY, '\assets\style.css'],
         
@@ -65,7 +65,7 @@ def register_dash_app(flask_server, title, base_pathname, layout, register_callb
     with flask_server.app_context():
         my_dash_app.title = title
         my_dash_app.layout = layout
-        my_dash_app._favicon = '\assets\favicon.ico'
+        my_dash_app._favicon =  os.path.join(os.path.abspath(os.path.dirname(__file__)).split('flask_server')[0], 'dash_application','assets', 'favicon.ico')
         for call_back_func in register_callbacks_funcs:
             call_back_func(my_dash_app)
 

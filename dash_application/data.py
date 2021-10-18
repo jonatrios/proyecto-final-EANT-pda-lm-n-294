@@ -18,10 +18,10 @@ paths = ['bicicletas.xlsx','subte.xlsx','vehiculos.xlsx']
 # Load data from local
 def movility_data():
     df_list = []
-    files_dir = basedir + '\dash_application\datasets'
+    files_dir = os.path.join(basedir, 'dash_application','datasets')
     print(basedir)
     for f in os.listdir(files_dir):
-        excel_file = f'{files_dir}\{f}'
+        excel_file = os.path.join(files_dir, f)
         df = pd.read_excel(excel_file)
         df_list.append(df)
     

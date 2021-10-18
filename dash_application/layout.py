@@ -3,13 +3,14 @@ from dash import html
 import os
 from dash import dcc
 from dash import html
+from dash.html.A import A
 import dash_bootstrap_components as dbc
 
 image_filename = "dash_application/assets/logo_corto.png"
 encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 
-image_opendata = "dash_application/assets/research_analytics.jpg"
+image_opendata = "dash_application/assets/logopng.png"
 encoded_opendata = base64.b64encode(open(image_opendata, 'rb').read())
 
 # the style arguments for the sidebar. We use position:fixed and a fixed width
@@ -34,26 +35,26 @@ CONTENT_STYLE = {
 
 CARD_TEXT_STYLE = {
     'textAlign': 'center',
-    'color': '#0074D9'
+    'color': '#FCFCFC'
 }
 
 sidebar = html.Div(
     [
-        html.H2([html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode()))], className="rounded mx-auto d-block"),
+        html.H2([html.A(html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode())), href="/index", title='Volver al inicio')], className="rounded mx-auto d-block"),
         html.Hr(),
         html.P(
             "Cada boton representa el analisis realizado de un dataset", className="lead"
         ),
         dbc.Nav(
             [
-                dbc.NavLink("Inicio", href="/", active="exact"),
+                dbc.NavLink("Inicio", href="/dash/", active="exact"),
                 dbc.NavLink("Bicicletas", href="/bicicletas", active="exact"),
                 dbc.NavLink("Subtes", href="/subte", active="exact"),
                 dbc.NavLink("Vehiculos", href="/vehiculos", active="exact"),
                 dbc.NavLink("Contaminantes", href="/contaminantes", active="exact"),
                 
-                html.Img(src='data:image/png;base64,{}'.format(encoded_opendata.decode()), className="img-responsive", style={'position':'absolute','bottom':0})
-            ],
+                html.Img(src='data:image/png;base64,{}'.format(encoded_opendata.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=200, height=100)
+            ], 
             vertical=True,
             pills=True,
         ),
@@ -123,8 +124,21 @@ content_first_row = dbc.Row([
         dcc.Graph(
             id='example-graph4',figure={}
         ),
-        width={'size': 5}
+        width={'size': 6}
+    ),
+    dbc.Col(
+        dcc.Graph(
+            id='example-graph5',figure={}
+        ),
+        width={'size': 6}
+    ),
+    dbc.Col(
+        dcc.Graph(
+            id='example-graph6',figure={}
+        ),
+        width={'size': 6, 'offset': 3}
     )
+
 ])
 
 

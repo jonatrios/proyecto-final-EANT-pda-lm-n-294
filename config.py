@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from flask import url_for
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -10,6 +11,12 @@ class Config():
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CACHE_TYPE = "SimpleCache"
     CACHE_DEFAULT_TIMEOUT = 300
+    APP_THEME = "flatly.css"
+    APP_NAME = "EANT-DA-PROYECTO-FINAL"
+    #APP_ICON = '/dash_application/assets/favicon.ico'
+
+    
+
 
     @staticmethod
     def init_app(self):

@@ -1,16 +1,22 @@
 from flask import Flask
+from flask_appbuilder import AppBuilder
 from flask_sqlalchemy import SQLAlchemy
 from flask_caching import Cache
 from flask_bootstrap import Bootstrap
 from config import config
 from dash import Dash
 import dash_bootstrap_components as dbc
-
+import logging
 
 
 db = SQLAlchemy()
 cache = Cache()
 bootstrap = Bootstrap()
+appbuilder = AppBuilder()
+
+logging.basicConfig(format="%(asctime)s:%(levelname)s:%(name)s:%(message)s")
+logging.getLogger().setLevel(logging.DEBUG)
+
 
 class CreateApp():
 
@@ -29,13 +35,17 @@ class CreateApp():
         register_dash_app(
             flask_server=app,
             title='EANT-DA-PROYECTO-FINAL',
-            base_pathname='/',
+            base_pathname='/dash/',
             layout=dash_layout,
             register_callbacks_funcs=[dash_callback]
         )
 
+        with app.app_context():
+            appbuilder.init_app(app, db.session)
+
 
         return app
+
 
 
 def register_dash_app(flask_server, title, base_pathname, layout, register_callbacks_funcs):
@@ -58,3 +68,7 @@ def register_dash_app(flask_server, title, base_pathname, layout, register_callb
         my_dash_app._favicon = '\assets\favicon.ico'
         for call_back_func in register_callbacks_funcs:
             call_back_func(my_dash_app)
+
+
+
+

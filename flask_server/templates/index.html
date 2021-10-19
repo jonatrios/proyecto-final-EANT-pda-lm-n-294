@@ -16,6 +16,8 @@
 {{ super() }}
 <link rel="shortcut icon" href="{{ url_for('_dash_dash_assets.static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('_dash_dash_assets.static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"  crossorigin="anonymous">
+
 {% endblock %}
 
 
@@ -32,16 +34,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/index">Proyecto Final EANT</a>
+            <a class="navbar-brand" href="/">Proyecto Final EANT</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('read_me') }}">Readme</a></li>
                 <li><a href="/dash">Dashboard</a></li>
-                <li><a href="/">Admin Site</a></li>
-                <li><a href="#">Contact us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="https://github.com/fernandorgonzalez/cursos-eant-python_data_analytics-proyecto" target="_blank">GitHub Repo</a></li>
+                <li><a href="https://github.com/fernandorgonzalez/cursos-eant-python_data_analytics-proyecto" target="_blank">GitHub Data Repo</a></li>
+                <li><a href="https://github.com/jonatrios/proyecto-final-EANT-pda-lm-n-294" target="_blank">GitHub App Repo</a></li>
             </ul>
         </div>
     </div>
@@ -70,9 +72,110 @@
     {% endblock %}
     
     <div class="page-header">
-        <h4 class="text-center">Ezequiel Mariani | Fernando Gonzalez | Jonathan Rios | Pablo Capozzi | Paula Arrigoni </h4>
+        <h4 class="text-center">
+        <a href="https://www.linkedin.com/in/ezequiel-mariani/" target="_blank">Ezequiel Mariani</a> | 
+        <a href="https://www.linkedin.com/in/fernandorodolfogonzalez/" target="_blank">Fernando Gonzalez</a> | 
+        <a href="https://www.linkedin.com/in/jonathanrios11/" target="_blank">Jonathan Rios</a> | 
+        <a href="https://www.linkedin.com/in/ing-pablo-capozzi-3a347012/" target="_blank">Pablo Capozzi</a> | 
+        <a href="https://www.linkedin.com/in/maría-paula-arrigoni-6a306592" target="_blank">Paula Arrigoni</a> 
+        </h4>
     </div>
     
-
 </div>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><strong><span style="font-size:21px;">Introducci&oacute;n:</span></strong></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&iquest;Qu&eacute; nos proponemos con este proyecto?</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>En el marco del desaf&iacute;o final del programa de Data Analytics de la EANT , nos planteamos las siguiente pregunta:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&iquest;C&oacute;mo se vieron afectados los indicadores de contaminantes y transporte por el COVID-19 en el a&ntilde;o 2020?</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>Para responder esta pregunta analizamos los set de datos provistos por el gobierno de la ciudad de buenos aires.</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><strong><span style="font-size:21px;">Conclusiones:</span></strong></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>1 &ndash; De acuerdo a los indicadores observados a priori podemos decir que durante el a&ntilde;o 2020 tomando como referencia el incio y fin del periodo hay transportes como el subte que sufrieron una disminuci&oacute;n de un 77% en su uso, otros como los vehiculos se reducieron en un 10% pero la buena noticia para el medio ambiente es que las bicicletas duplicaron sus valores.</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>2 &ndash; De hecho, el cambio en el uso del transporte favorece al medio ambiente con una reducci&oacute;n del 28% para los contaminantes.</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<img src="{{ url_for('_dash_dash_assets.static', filename='pda-lm-n-294-1_page-0001.jpg') }}" alt="Trulli" width="1200" height="800">
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><strong><span style="font-size:21px;">Metodolog&iacute;a:</span></strong></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>1 - La fuente de datos corresponde al gobierno de la ciudad de Buenos Aires, puntualmente el sitio Buenos Aires Data:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><a href="https://data.buenosaires.gob.ar/dataset/">https://data.buenosaires.gob.ar/dataset/</a></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>Bicicletas:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><br></p>
+<p id="isPasted" style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><a href="https://cdn.buenosaires.gob.ar/datosabiertos/datasets/transporte/bicicletas-publicas/recorridos-realizados-2020.zip">https://cdn.buenosaires.gob.ar/datosabiertos/datasets/transporte/bicicletas-publicas/recorridos-realizados-2020.zip</a></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>Contaminantes:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><a href="https://cdn.buenosaires.gob.ar/datosabiertos/datasets/agencia-de-proteccion-ambiental/calidad-aire/calidad-aire.csv">https://cdn.buenosaires.gob.ar/datosabiertos/datasets/agencia-de-proteccion-ambiental/calidad-aire/calidad-aire.csv</a></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><br></p>
+<p id="isPasted" style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>Casos de Covid:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><a href="https://sisa.msal.gov.ar/datos/descargas/covid-19/files/Covid19Casos.zip">https://sisa.msal.gov.ar/datos/descargas/covid-19/files/Covid19Casos.zip</a></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>Subte:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><a href="https://cdn.buenosaires.gob.ar/datosabiertos/datasets/sbase/subte-viajes-molinetes/molinetes-2020.zip">https://cdn.buenosaires.gob.ar/datosabiertos/datasets/sbase/subte-viajes-molinetes/molinetes-2020.zip</a></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>Veh&iacute;culos:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><a href="https://cdn.buenosaires.gob.ar/datosabiertos/datasets/ausa/flujo-vehicular-por-unidades-peaje-ausa/flujo-vehicular-2020.csv">https://cdn.buenosaires.gob.ar/datosabiertos/datasets/ausa/flujo-vehicular-por-unidades-peaje-ausa/flujo-vehicular-2020.csv</a></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>2 &ndash; En lo que respecta a la limpieza y normalizaci&oacute;n de datos elegimos utilizar una notebook por cada uno de los datasets:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>bicicletas.ipynb</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>contaminantes.ipynb</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>covid.ipynb</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>subte.ipynb</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>vehiculos.ipynb</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>3 &ndash; Una vez concluida la limpieza y normalizaci&oacute;n avanzamos con la carga de los datos ya procesados para su posterior visualizaci&oacute;n en la siguiente notebook:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>pda-lm-n-294-1.ipynb</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><strong><span style="font-size:21px;">Problemas Encontrados:</span></strong></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>1 &ndash; No todos los sets de datos se encuentran actualizados a la fecha o bien en los mismos periodos de tiempo, por lo que decidimos focalizar el an&aacute;lisis en el a&ntilde;o 2020</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>2 &ndash; Por tratarse de un trabajo en equipo donde necesit&aacute;bamos avanzar en forma colaborativa adoptamos el uso de la herramienta GitHub</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>3 &ndash; El set de datos de origen cuenta con informaci&oacute;n dispar en distintas escalas por lo que en la normalizaci&oacute;n elegimos una escala del 1 al 10 y de esa forma facilitamos la posterior comparaci&oacute;n.</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'><strong><span style="font-size:21px;">Herramientas:</span></strong></p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>Librer&iacute;as:</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;import matplotlib.pyplot as plt</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;text-indent:35.4pt;'>import numpy as np</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;text-indent:35.4pt;'>import plotly.express as px</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;text-indent:35.4pt;'>import pandas as pd</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;text-indent:35.4pt;'>import seaborn as sns</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>GitHub</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+<p style='margin:0cm;font-size:16px;font-family:"Calibri",sans-serif;'>Dash</p>
+<br></br>
+<footer class="bg-light text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Proyecto Final EANT - Grupo 1  
+    <a class="text-white" target=_blank href="https://eant.tech/">EANT.tech </a>
+  </div>
+  <!-- Copyright -->
+</footer>
 {% endblock %}

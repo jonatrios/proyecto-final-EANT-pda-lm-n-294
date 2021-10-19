@@ -1,0 +1,250 @@
+{% extends "index.html" %}
+
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% block page_content %}
+<section class="markdown">
+        <p class="github">
+          <span class="hk-icon hk-icon-github-2"></span>GitHub Readme.md
+        </p>
+        <div class="announce instapaper_body md">
+<h1>
+<a class="anchor" href="#about-this-fork"><span class="octicon octicon-link"></span></a>About this fork</h1>
+
+<p>This fork repo behaves like heroku default buildpack but pre compiles i18n-js translations before running other asset preocompilation so that this gem can be used in production mode.</p>
+
+<p>application.rb should look like this: <a href="https://gist.github.com/3316981">https://gist.github.com/3316981</a></p>
+
+<p>to boot application without DB use: env SKIP_DB=1 bundle exec rake i18n:js:export</p>
+
+<p>That is what the buildpack does and it compiles well. Add this .gitignore</p>
+
+<p>/app/assets/javascript/i18n/*</p>
+
+<h1>
+<a class="anchor" href="#heroku-buildpack-ruby"><span class="octicon octicon-link"></span></a>Heroku buildpack: Ruby</h1>
+
+<p>This is a <a href="http://devcenter.heroku.com/articles/buildpacks">Heroku buildpack</a> for Ruby, Rack, and Rails apps. It uses <a href="http://gembundler.com">Bundler</a> for dependency management.</p>
+
+<h2>
+<a class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a class="anchor" href="#ruby"><span class="octicon octicon-link"></span></a>Ruby</h3>
+
+<p>Example Usage:</p>
+
+<pre><code>$ ls
+Gemfile Gemfile.lock
+
+$ heroku create --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-ruby.git
+
+$ git push heroku master
+...
+-----&gt; Heroku receiving push
+-----&gt; Fetching custom buildpack
+-----&gt; Ruby app detected
+-----&gt; Installing dependencies using Bundler version 1.1.rc
+       Running: bundle install --without development:test --path vendor/bundle --deployment
+       Fetching gem metadata from http://rubygems.org/..
+       Installing rack (1.3.5)
+       Using bundler (1.1.rc)
+       Your bundle is complete! It was installed into ./vendor/bundle
+       Cleaning up the bundler cache.
+-----&gt; Discovering process types
+       Procfile declares types -&gt; (none)
+       Default types for Ruby  -&gt; console, rake
+</code></pre>
+
+<p>The buildpack will detect your app as Ruby if it has a <code>Gemfile</code> and <code>Gemfile.lock</code> files in the root directory. It will then proceed to run <code>bundle install</code> after setting up the appropriate environment for <a href="http://ruby-lang.org">ruby</a> and <a href="http://gembundler.com">Bundler</a>.</p>
+
+<h4>
+<a class="anchor" href="#run-the-tests"><span class="octicon octicon-link"></span></a>Run the Tests</h4>
+
+<p>The tests on this buildpack are written in Rspec to allow the use of
+<code>focused: true</code>. Parallelization of testing is provided by
+<a href="https://github.com/grosser/parallel_tests">https://github.com/grosser/parallel_tests</a> this lib spins up an arbitrary
+number of processes and running a different test file in each process,
+it does not parallelize tests within a test file. To run the tests: clone the repo, then <code>bundle install</code> then clone the test fixtures by running:</p>
+
+<div class="highlight highlight-sh"><pre>$ hatchet install</pre></div>
+
+<p>Now run the tests:</p>
+
+<div class="highlight highlight-sh"><pre>$ bundle <span class="pl-c1">exec</span> parallel_rspec -n 6 spec/</pre></div>
+
+<p>If you don't want to run them in parallel you can still:</p>
+
+<div class="highlight highlight-sh"><pre>$ bundle <span class="pl-c1">exec</span> rake spec</pre></div>
+
+<p>Now go take a nap or something for a really long time.</p>
+
+<h4>
+<a class="anchor" href="#bundler"><span class="octicon octicon-link"></span></a>Bundler</h4>
+
+<p>For non-windows <code>Gemfile.lock</code> files, the <code>--deployment</code> flag will be used. In the case of windows, the Gemfile.lock will be deleted and Bundler will do a full resolve so native gems are handled properly. The <code>vendor/bundle</code> directory is cached between builds to allow for faster <code>bundle install</code> times. <code>bundle clean</code> is used to ensure no stale gems are stored between builds.</p>
+
+<h3>
+<a class="anchor" href="#rails-2"><span class="octicon octicon-link"></span></a>Rails 2</h3>
+
+<p>Example Usage:</p>
+
+<pre><code>$ ls
+app  config  db  doc  Gemfile  Gemfile.lock  lib  log  public  Rakefile  README  script  test  tmp  vendor
+
+$ ls config/environment.rb
+config/environment.rb
+
+$ heroku create --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-ruby.git
+
+$ git push heroku master
+...
+-----&gt; Heroku receiving push
+-----&gt; Ruby/Rails app detected
+-----&gt; Installing dependencies using Bundler version 1.1.rc
+...
+-----&gt; Writing config/database.yml to read from DATABASE_URL
+-----&gt; Rails plugin injection
+       Injecting rails_log_stdout
+-----&gt; Discovering process types
+       Procfile declares types      -&gt; (none)
+       Default types for Ruby/Rails -&gt; console, rake, web, worker
+</code></pre>
+
+<p>The buildpack will detect your app as a Rails 2 app if it has a <code>environment.rb</code> file in the <code>config</code>  directory.</p>
+
+<h4>
+<a class="anchor" href="#rails-log-stdout"><span class="octicon octicon-link"></span></a>Rails Log STDOUT</h4>
+
+<p>A <a href="http://github.com/ddollar/rails_log_stdout">rails_log_stdout</a> is installed by default so Rails' logger will log to STDOUT and picked up by Heroku's <a href="http://github.com/heroku/logplex">logplex</a>.</p>
+
+<h4>
+<a class="anchor" href="#auto-injecting-plugins"><span class="octicon octicon-link"></span></a>Auto Injecting Plugins</h4>
+
+<p>Any vendored plugin can be stopped from being installed by creating the directory it's installed to in the slug. For instance, to prevent rails_log_stdout plugin from being injected, add <code>vendor/plugins/rails_log_stdout/.gitkeep</code> to your git repo.</p>
+
+<h3>
+<a class="anchor" href="#rails-3"><span class="octicon octicon-link"></span></a>Rails 3</h3>
+
+<p>Example Usage:</p>
+
+<pre><code>$ ls
+app  config  config.ru  db  doc  Gemfile  Gemfile.lock  lib  log  Procfile  public  Rakefile  README  script  tmp  vendor
+
+$ ls config/application.rb
+config/application.rb
+
+$ heroku create --stack cedar --buildpack https://github.com/heroku/heroku-buildpack-ruby.git
+
+$ git push heroku master
+-----&gt; Heroku receiving push
+-----&gt; Ruby/Rails app detected
+-----&gt; Installing dependencies using Bundler version 1.1.rc
+       Running: bundle install --without development:test --path vendor/bundle --deployment
+       ...
+-----&gt; Writing config/database.yml to read from DATABASE_URL
+-----&gt; Preparing app for Rails asset pipeline
+       Running: rake assets:precompile
+-----&gt; Rails plugin injection
+       Injecting rails_log_stdout
+       Injecting rails3_serve_static_assets
+-----&gt; Discovering process types
+       Procfile declares types      -&gt; web
+       Default types for Ruby/Rails -&gt; console, rake, worker
+</code></pre>
+
+<p>The buildpack will detect your apps as a Rails 3 app if it has an <code>application.rb</code> file in the <code>config</code> directory.</p>
+
+<h4>
+<a class="anchor" href="#assets"><span class="octicon octicon-link"></span></a>Assets</h4>
+
+<p>To enable static assets being served on the dyno, <a href="http://github.com/pedro/rails3_serve_static_assets">rails3_serve_static_assets</a> is installed by default. If the <a href="http://github.com/sstephenson/execjs">execjs gem</a> is detected then <a href="http://github.com/joyent/node">node.js</a> will be vendored. The <code>assets:precompile</code> rake task will get run if no <code>public/manifest.yml</code> is detected.  See <a href="http://devcenter.heroku.com/articles/rails31_heroku_cedar">this article</a> on how rails 3.1 works on cedar.</p>
+
+<h2>
+<a class="anchor" href="#hacking"><span class="octicon octicon-link"></span></a>Hacking</h2>
+
+<p>To use this buildpack, fork it on Github.  Push up changes to your fork, then create a test app with <code>--buildpack &lt;your-github-url&gt;</code> and push to it.</p>
+
+<p>To change the vendored binaries for Bundler, <a href="http://github.com/joyent/node">Node.js</a>, and rails plugins, use the rake tasks provided by the <code>Rakefile</code>. You'll need an S3-enabled AWS account and a bucket to store your binaries in as well as the <a href="http://github.com/heroku/vulcan">vulcan</a> gem to build the binaries on heroku.</p>
+
+<p>For example, you can change the vendored version of Bundler to 1.1.rc.</p>
+
+<p>First you'll need to build a Heroku-compatible version of Node.js:</p>
+
+<pre><code>$ export AWS_ID=xxx AWS_SECRET=yyy S3_BUCKET=zzz
+$ s3 create $S3_BUCKET
+$ rake gem:install[bundler,1.1.rc]
+</code></pre>
+
+<p>Open <code>lib/language_pack/ruby.rb</code> in your editor, and change the following line:</p>
+
+<pre><code>BUNDLER_VERSION = "1.1.rc"
+</code></pre>
+
+<p>Open <code>lib/language_pack/base.rb</code> in your editor, and change the following line:</p>
+
+<pre><code>VENDOR_URL = "https://s3.amazonaws.com/zzz"
+</code></pre>
+
+<p>Commit and push the changes to your buildpack to your Github fork, then push your sample app to Heroku to test.  You should see:</p>
+
+<pre><code>-----&gt; Installing dependencies using Bundler version 1.1.rc
+</code></pre>
+
+<p>NOTE: You'll need to vendor the plugins, node, Bundler, and libyaml by running the rake tasks for the buildpack to work properly.</p>
+
+<h2>
+<a class="anchor" href="#flow"><span class="octicon octicon-link"></span></a>Flow</h2>
+
+<p>Here's the basic flow of how the buildpack works:</p>
+
+<p>Ruby (Gemfile and Gemfile.lock is detected)</p>
+
+<ul>
+<li>runs Bundler</li>
+<li>installs binaries
+
+<ul>
+<li>installs node if the gem execjs is detected</li>
+</ul>
+</li>
+<li>runs <code>rake assets:precompile</code> if the rake task is detected</li>
+</ul>
+
+<p>Rack (config.ru is detected)</p>
+
+<ul>
+<li>everything from Ruby</li>
+<li>sets RACK_ENV=production</li>
+</ul>
+
+<p>Rails 2 (config/environment.rb is detected)</p>
+
+<ul>
+<li>everything from Rack</li>
+<li>sets RAILS_ENV=production</li>
+<li>install rails 2 plugins
+
+<ul>
+<li><a href="http://github.com/ddollar/rails_log_stdout">rails_log_stdout</a></li>
+</ul>
+</li>
+</ul>
+
+<p>Rails 3 (config/application.rb is detected)</p>
+
+<ul>
+<li>everything from Rails 2</li>
+<li>install rails 3 plugins
+
+<ul>
+<li><a href="https://github.com/pedro/rails3_serve_static_assets">rails3_server_static_assets</a></li>
+</ul>
+</li>
+</ul>
+</div>
+      </section>
+{% endblock %}
+{% endblock %}

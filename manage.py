@@ -2,7 +2,7 @@ import os
 from flask_server import CreateApp, db
 from flask_migrate import Migrate
 from routers import Routes
-from flask_appbuilder import AppBuilder
+
 
 
 app = CreateApp()
@@ -15,7 +15,6 @@ app = app.get_routes()
 
 
 
-#create_dash_application(app)
 
 with app.app_context():
     db.create_all()

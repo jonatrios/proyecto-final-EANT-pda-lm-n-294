@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap
 from config import config
 from dash import Dash
 import dash_bootstrap_components as dbc
-import logging
+#import logging
 import os
 
 db = SQLAlchemy()
@@ -14,8 +14,8 @@ cache = Cache()
 bootstrap = Bootstrap()
 appbuilder = AppBuilder()
 
-logging.basicConfig(format="%(asctime)s:%(levelname)s:%(name)s:%(message)s")
-logging.getLogger().setLevel(logging.DEBUG)
+# logging.basicConfig(format="%(asctime)s:%(levelname)s:%(name)s:%(message)s")
+# logging.getLogger().setLevel(logging.DEBUG)
 
 
 class CreateApp():

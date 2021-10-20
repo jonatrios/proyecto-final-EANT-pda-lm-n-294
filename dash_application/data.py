@@ -30,7 +30,7 @@ def movility_data():
     df = pd.concat(df_list)
     return df
     
-df_estaciones = pd.read_excel(r'C:\Users\Lucia Zabaleta\app-proyecto-final-eant\dash_application\datasets\estaciones.xlsx')
+df_estaciones = pd.read_excel(os.path.join(os.path.abspath('.'),"dash_application","datasets", "estaciones.xlsx"))
 
 # For loading files directly from github
 def external_movility():  

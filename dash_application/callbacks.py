@@ -1,17 +1,15 @@
 import base64
+import os
 from dash import dcc
 from dash import html
 from dash.html import Tr
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import plotly.express as px
-from .layout import content, CARD_TEXT_STYLE
+import plotly.graph_objects as go 
+from dash_application.data import movility_data, df_estaciones
 
-from dash_application.data import movility_data
 
-
-# bike_filename = "dash_application/assets/BICI1.png"
-# encoded_bike = base64.b64encode(open(bike_filename, 'rb').read())
 
 df = movility_data()
 
@@ -21,8 +19,40 @@ df_subtes = df[df['TIPO'] == 'Subte']
 
 df_vehiculos = df[df['TIPO'] == 'Vehículos']
 
-df_cont = df[df['Tipo'] == 'Contaminantes']
+df_cont = df[df['TIPO'] == 'Contaminantes']
 
+df_covid = df[df['TIPO'] == 'Casos de Covid']
+
+df_integrado = df[df['TIPO'] != 'Casos de Covid']
+
+# fig_covid = px.bar(
+#         df_covid, x=df_covid['Mes'], y=df_covid['Intervalo'], color=df_covid['Mes'], barmode="group", opacity=0.8
+#         )
+# fig_covid.add_scatter(x=df_cont['Mes'], y=df_cont['Intervalo'], name="Last year", line = dict(color='royalblue', width=4, dash='dash'))
+# fig_covid.add_scatter(x=df_bici['MES'], y=df_bici['INTERVALO'], name="Last year", line = dict(color='firebrick', width=4, dash='dot'))
+
+fig_covid = go.Figure()
+# Create and style traces
+fig_covid.add_trace(go.Scatter(x=df_bici['MES'], y=df_bici['INTERVALO'], name='Bicicletas',
+                         line=dict(color='#417DC1', width=4)))
+fig_covid.add_trace(go.Scatter(x=df_vehiculos['MES'], y=df_vehiculos['INTERVALO'], name = 'Vehículos',
+                         line=dict(color='#04A404', width=4, dash='dashdot')))
+fig_covid.add_trace(go.Scatter(x=df_cont['MES'], y=df_cont['INTERVALO'], name='Contaminantes',
+                         line=dict(color='#E30049', width=4,
+                              dash='dash'))) # dash options include 'dash', 'dot', and 'dashdot'))
+fig_covid.add_trace(go.Scatter(x=df_subtes['MES'], y=df_subtes['INTERVALO'], name='Subte',
+                         line = dict(color='#FF8000', width=4, dash='dash')))
+
+fig_covid.add_trace(
+    go.Bar(
+        x=df_covid['MES'], 
+        y=df_covid['INTERVALO'],
+        marker_color=['#0d0887', '#46039f', '#7201a8', '#9c179e', '#bd3786', '#d8576b', '#de7065', '#ed7953', '#fb9f3a', '#fdca26', '#efe350','#f0f921'],
+        name="Covid-19"
+    ))
+
+fig_covid.update_layout( barmode="group", xaxis=dict(title='MES', showgrid=True, gridcolor='#E5E3E3', spikemode="marker"), yaxis=dict(title='INTERVALO NORMALIZADO',showgrid=True, gridcolor='Grey'), paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)', width=1300, height=700)
 
 def bar_fig(dataframe, X, Y,color_by_column,  image, divide):
     filename = image
@@ -77,12 +107,56 @@ def bar_fig(dataframe, X, Y,color_by_column,  image, divide):
     ])
     return [a,b]
 
+
+def map_and_bar(df_bar, df_map, X, Y,lat,lon,color_by_column, divide):
+    fig_bar = px.bar(
+        df_bar, x=df_bar[X], y=df_bar[Y], color=df_bar[color_by_column], barmode="group", opacity=0.8
+        )
+    fig_bar.update_traces(text=(round(df_bar[Y]/divide)), textposition='outside')
+    fig_bar.update_layout(xaxis=dict(showgrid=True, gridcolor='#E5E3E3', spikemode="marker"), yaxis=dict(showgrid=True, gridcolor='Grey'), paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)')
+    px.set_mapbox_access_token(open(os.path.join(os.path.abspath('.'),"dash_application",".mapbox_token")).read())
+    fig_map = px.scatter_mapbox(df_map, lat=df_map[lat], lon=df_map[lon], size=[80,80,80,80], zoom=11, center={'lat':-34.61315, 'lon':-58.37723},
+    hover_name=df_map['NOMBRE'],mapbox_style="open-street-map",hover_data=[df_map['NOMBRE'], df_map['ZONA_DE_EMPLAZAMIENTO']])
+                 # color_continuous_scale=px.colors.cyclical.IceFire
+    a = dbc.Row([
+                
+                dbc.Col(
+                    dcc.Graph(id='bar_map_1',figure=fig_bar),
+                    width={'size': 10, 'offset': 1}
+                )
+                
+    ])
+    e = dbc.Row([
+                dbc.Col(
+                    html.Br()
+                )
+        ])
+    d = dbc.Row([
+                dbc.Col(
+                    html.Hr()
+                )
+        ])
+    c = b = dbc.Row([
+                dbc.Col(
+                    html.H3("Red de monitoreo de contaminantes")
+                )
+        ])
+    b = dbc.Row([
+                dbc.Col(
+                    dcc.Graph(id='bar_map_2',figure=fig_map),
+                    width={'size': 10, 'offset': 1}
+                )
+
+    ])
+    return [a,e,c,d,b]
+
 def register_callback(dash_app):
 
     @dash_app.callback(Output("page-content", "children"), [Input("url", "pathname")])
     def render_page_content(pathname):
         if pathname == "/dash/":
-            return html.H2(['Aca va la descripcion del proyecto',html.Hr()])
+            return html.H3(['Comparativa: Casos de Covid Vs Transporte y Contaminantes durante el 2020',html.Hr(), dcc.Graph(id='comparativa',figure=fig_covid)], className="text-center")
         elif pathname == "/bicicletas":
             return html.H2(["Utilizacion del medio de transporte BICICLETA durante el año 2020",html.Hr(),html.Br()] + bar_fig(df_bici,'MES','TOTAL', 'MES',"dash_application/assets/BICI1.png", 1000), className="text-left")
         elif pathname == "/subte":
@@ -90,7 +164,8 @@ def register_callback(dash_app):
         elif pathname == "/vehiculos":
             return html.H2(["Utilizacion de VEHICULOS durante el año 2020",html.Hr(),html.Br()] + bar_fig(df_vehiculos,'MES','TOTAL', 'MES',"dash_application/assets/VEHICULOS.png",1000), className="text-left")
         elif pathname == '/contaminantes':
-            return html.H2(["Emisiones contaminantes",html.Hr(),html.Br()] + bar_fig(df_cont,'Mes','Total', 'Mes',"dash_application/assets/CONTAMINANTES.png",1), className="text-left")
+            return html.H2(["Emisiones contaminantes",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-left")
+#                     width={'size': 10, 'offset': 1}
         # If the user tries to reach a different page, return a 404 message
         return dbc.Jumbotron(
             [

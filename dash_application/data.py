@@ -12,7 +12,7 @@ load_dotenv(basedir + '\.env')
 git_key = os.environ.get('GITHUB_TOKEN') 
 owner = os.environ.get('REPO_OWNER') 
 repo = os.environ.get('REPO_NAME')
-paths = ['bicicletas.xlsx','subte.xlsx','vehiculos.xlsx']
+paths = ['bicicletas.xlsx','subte.xlsx','vehiculos.xlsx', 'covid (1).xlsx']
 
 
 # Load data from local
@@ -21,14 +21,16 @@ def movility_data():
     files_dir = os.path.join(basedir, 'dash_application','datasets')
     print(basedir)
     for f in os.listdir(files_dir):
+        
         excel_file = os.path.join(files_dir, f)
         df = pd.read_excel(excel_file)
+        df.columns = ['DICIEMBRE_ENERO' if name == 'Diciembre Vs Enero' else name.upper()for name in df.columns.values]
         df_list.append(df)
     
     df = pd.concat(df_list)
     return df
     
-
+df_estaciones = pd.read_excel(r'C:\Users\Lucia Zabaleta\app-proyecto-final-eant\dash_application\datasets\estaciones.xlsx')
 
 # For loading files directly from github
 def external_movility():  

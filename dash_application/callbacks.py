@@ -128,7 +128,8 @@ def register_callback(dash_app):
     @dash_app.callback(Output("page-content", "children"), [Input("url", "pathname")])
     def render_page_content(pathname):
         if pathname == "/dash/":
-            return html.H3(['Comparativa: Casos de Covid Vs Transporte y Contaminantes durante el 2020',html.Hr(), dcc.Graph(id='comparativa',figure=fig_covid)], className="text-center")
+            #return html.H3(['Comparativa: Casos de Covid Vs Transporte y Contaminantes durante el 2020',html.Hr(), dcc.Graph(id='comparativa',figure=fig_covid)], className="text-center")
+            return html.H3(['Casos de Covid / Contaminantes / Transporte 2020',html.Hr(), dcc.Graph(id='comparativa',figure=fig_covid)], className="text-center")
         elif pathname == "/bicicletas":
             return html.H2(["Utilizacion del medio de transporte BICICLETA durante el año 2020",html.Hr(),html.Br()] + bar_fig(df_bici,'MES','TOTAL', 'MES',"dash_application/assets/BICI1.png", 1000), className="text-left")
         elif pathname == "/subte":

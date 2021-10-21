@@ -43,7 +43,8 @@ sidebar = html.Div(
         html.H2([html.A(html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode())), href="/", title='Volver al inicio')], className="rounded mx-auto d-block"),
         html.Hr(),
         html.P(
-            "Cada boton representa el analisis realizado de un dataset", className="lead"
+            #"Cada boton representa el analisis realizado de un dataset", className="lead"
+            "Python Data Analytics - pda-lm-n-294 - Grupo 1", className="lead"
         ),
         dbc.Nav(
             [

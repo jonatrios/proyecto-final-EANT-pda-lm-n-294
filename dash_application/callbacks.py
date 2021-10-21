@@ -111,7 +111,8 @@ def map_and_bar(df_bar, df_map, X, Y,lat,lon,color_by_column, divide):
         ])
     c = b = dbc.Row([
                 dbc.Col(
-                    html.H3("Red de monitoreo de contaminantes")
+                    #html.H2("Red de monitoreo de contaminantes")
+                    html.H2("Estaciones Ambientales")
                 )
         ])
     b = dbc.Row([
@@ -132,16 +133,16 @@ def register_callback(dash_app):
             return html.H3(['Casos de Covid / Contaminantes / Transporte 2020',html.Hr(), dcc.Graph(id='comparativa',figure=fig_covid)], className="text-center")
         elif pathname == "/bicicletas":
             #return html.H2(["Utilizacion del medio de transporte BICICLETA durante el año 2020",html.Hr(),html.Br()] + bar_fig(df_bici,'MES','TOTAL', 'MES',"dash_application/assets/BICI1.png", 1000), className="text-left")
-            return html.H3(["Viajes en Bicicleta 2020 (+ 100%)",html.Hr(),html.Br()] + bar_fig(df_bici,'MES','TOTAL', 'MES',"dash_application/assets/BICI1.png", 1000), className="text-left")
+            return html.H3(["Viajes en Bicicleta 2020 (+ 100%)",html.Hr(),html.Br()] + bar_fig(df_bici,'MES','TOTAL', 'MES',"dash_application/assets/BICI1.png", 1000), className="text-center")
         elif pathname == "/subte":
             #return html.H2(["Utilizacion del medio de transporte SUBTE durante el año 2020",html.Hr(),html.Br()] + bar_fig(df_subtes,'MES','TOTAL', 'MES',"dash_application/assets/SUBTE.png",1000), className="text-left")
-            return html.H3(["Viajes en Subte 2020 (-77 %)",html.Hr(),html.Br()] + bar_fig(df_subtes,'MES','TOTAL', 'MES',"dash_application/assets/SUBTE.png",1000), className="text-left")
+            return html.H3(["Viajes en Subte 2020 (-77 %)",html.Hr(),html.Br()] + bar_fig(df_subtes,'MES','TOTAL', 'MES',"dash_application/assets/SUBTE.png",1000), className="text-center")
         elif pathname == "/vehiculos":
             #return html.H2(["Utilizacion de VEHICULOS durante el año 2020",html.Hr(),html.Br()] + bar_fig(df_vehiculos,'MES','TOTAL', 'MES',"dash_application/assets/VEHICULOS.png",1000), className="text-left")
-            return html.H3(["Viajes en Vehículos 2020 (-10 %)",html.Hr(),html.Br()] + bar_fig(df_vehiculos,'MES','TOTAL', 'MES',"dash_application/assets/VEHICULOS.png",1000), className="text-left")
+            return html.H3(["Viajes en Vehículos 2020 (-10 %)",html.Hr(),html.Br()] + bar_fig(df_vehiculos,'MES','TOTAL', 'MES',"dash_application/assets/VEHICULOS.png",1000), className="text-center")
         elif pathname == '/contaminantes':
             #return html.H2(["Emisiones contaminantes",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-left")
-            return html.H3(["Contaminantes 2020 (-28 %)",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-left")
+            return html.H3(["Contaminantes 2020 (-28 %)",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-center")
 
         # If the user tries to reach a different page, return a 404 message
         return dbc.Jumbotron(

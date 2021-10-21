@@ -1,1 +1,1 @@
-web: gunicorn manage:app --bind 0.0.0.0:${PORT}
+web: cat ./replace.txt >> /usr/local/lib/python3.8/site-packages/flask_appbuilder/views.py && gunicorn manage:app --bind 0.0.0.0:${PORT}

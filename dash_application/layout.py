@@ -13,6 +13,9 @@ encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 image_opendata = "dash_application/assets/logopng.png"
 encoded_opendata = base64.b64encode(open(image_opendata, 'rb').read())
 
+image_ba_data = "dash_application/assets/ba_data.jpg"
+encoded_ba_data = base64.b64encode(open(image_ba_data, 'rb').read())
+
 # the style arguments for the sidebar. We use position:fixed and a fixed width
 SIDEBAR_STYLE = {
     "position": "fixed",
@@ -54,7 +57,8 @@ sidebar = html.Div(
                 dbc.NavLink("Vehiculos", href="/vehiculos", active="exact"),
                 dbc.NavLink("Contaminantes", href="/contaminantes", active="exact"),
                 
-                html.Img(src='data:image/png;base64,{}'.format(encoded_opendata.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=200, height=100)
+                #html.Img(src='data:image/png;base64,{}'.format(encoded_opendata.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=200, height=100)
+                html.Img(src='data:image/png;base64,{}'.format(encoded_ba_data.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=202, height=202)
             ], 
             vertical=True,
             pills=True,

@@ -122,7 +122,7 @@ def map_and_bar(df_bar, df_map, X, Y,lat,lon,color_by_column, divide):
                 )
 
     ])
-    return [a,e,c,d,b]
+    return [a,e]
 
 def map_and_bar_map(df_bar, df_map, X, Y,lat,lon,color_by_column, divide):
     fig_bar = px.bar(
@@ -156,7 +156,7 @@ def map_and_bar_map(df_bar, df_map, X, Y,lat,lon,color_by_column, divide):
     c = b = dbc.Row([
                 dbc.Col(
                     #html.H2("Red de monitoreo de contaminantes")
-                    html.H2("Estaciones Ambientales")
+                    html.H3("Estaciones Ambientales")
                 )
         ])
     b = dbc.Row([

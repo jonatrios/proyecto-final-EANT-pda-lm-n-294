@@ -57,7 +57,8 @@ sidebar = html.Div(
                 dbc.NavLink("Vehiculos", href="/vehiculos", active="exact"),
                 dbc.NavLink("Contaminantes", href="/contaminantes", active="exact"),
                 dbc.NavLink("Estaciones Ambientales", href="/estaciones", active="exact"),
-                dbc.NavLink("GitHub", href="https://github.com/fernandorgonzalez/cursos-eant-python_data_analytics-proyecto#readme", active="exact"),
+                dbc.NavLink("GitHub (App)", href="https://github.com/jonatrios/proyecto-final-EANT-pda-lm-n-294", active="exact"),
+                dbc.NavLink("GitHub (Data)", href="https://github.com/fernandorgonzalez/cursos-eant-python_data_analytics-proyecto#readme", active="exact"),
                 
                 #html.Img(src='data:image/png;base64,{}'.format(encoded_opendata.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=200, height=100)
                 #html.Img(src='data:image/png;base64,{}'.format(encoded_ba_data.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=202, height=202)

@@ -124,6 +124,50 @@ def map_and_bar(df_bar, df_map, X, Y,lat,lon,color_by_column, divide):
     ])
     return [a,e,c,d,b]
 
+def map_and_bar_map(df_bar, df_map, X, Y,lat,lon,color_by_column, divide):
+    fig_bar = px.bar(
+        df_bar, x=df_bar[X], y=df_bar[Y], color=df_bar[color_by_column], barmode="group", opacity=0.8
+        )
+    fig_bar.update_traces(text=(round(df_bar[Y]/divide)), textposition='outside')
+    fig_bar.update_layout(xaxis=dict(showgrid=True, gridcolor='#E5E3E3', spikemode="marker"), yaxis=dict(showgrid=True, gridcolor='Grey'), paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)')
+    px.set_mapbox_access_token(open(os.path.join(os.path.abspath('.'),"dash_application",".mapbox_token")).read())
+    fig_map = px.scatter_mapbox(df_map, lat=df_map[lat], lon=df_map[lon], size=[80,80,80,80], zoom=11, center={'lat':-34.61315, 'lon':-58.37723},
+    hover_name=df_map['NOMBRE'],mapbox_style="open-street-map",hover_data=[df_map['NOMBRE'], df_map['ZONA_DE_EMPLAZAMIENTO']])
+                 
+    a = dbc.Row([
+                
+                dbc.Col(
+                    dcc.Graph(id='bar_map_1',figure=fig_bar),
+                    width={'size': 10, 'offset': 1}
+                )
+                
+    ])
+    e = dbc.Row([
+                dbc.Col(
+                    html.Br()
+                )
+        ])
+    d = dbc.Row([
+                dbc.Col(
+                    html.Hr()
+                )
+        ])
+    c = b = dbc.Row([
+                dbc.Col(
+                    #html.H2("Red de monitoreo de contaminantes")
+                    html.H2("Estaciones Ambientales")
+                )
+        ])
+    b = dbc.Row([
+                dbc.Col(
+                    dcc.Graph(id='bar_map_2',figure=fig_map),
+                    width={'size': 10, 'offset': 1}
+                )
+
+    ])
+    return [c,d,b]
+
 def register_callback(dash_app):
 
     @dash_app.callback(Output("page-content", "children"), [Input("url", "pathname")])
@@ -145,7 +189,7 @@ def register_callback(dash_app):
             return html.H3(["Contaminantes 2020 (-28 %)",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-center")
         elif pathname == '/estaciones':
             #return html.H2(["Emisiones contaminantes",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-left")
-            return html.H3(["Contaminantes 2020 (-28 %)",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-center")
+            return html.H3(["Contaminantes 2020 (-28 %)",html.Hr(),html.Br()] + map_and_bar_map(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-center")
 
         # If the user tries to reach a different page, return a 404 message
         return dbc.Jumbotron(

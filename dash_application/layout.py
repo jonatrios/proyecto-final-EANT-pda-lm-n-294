@@ -56,9 +56,10 @@ sidebar = html.Div(
                 dbc.NavLink("Subtes", href="/subte", active="exact"),
                 dbc.NavLink("Vehiculos", href="/vehiculos", active="exact"),
                 dbc.NavLink("Contaminantes", href="/contaminantes", active="exact"),
+                dbc.NavLink("Estaciones", href="/estaciones", active="exact"),
                 
                 #html.Img(src='data:image/png;base64,{}'.format(encoded_opendata.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=200, height=100)
-                html.Img(src='data:image/png;base64,{}'.format(encoded_ba_data.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=202, height=202)
+                #html.Img(src='data:image/png;base64,{}'.format(encoded_ba_data.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=202, height=202)
             ], 
             vertical=True,
             pills=True,

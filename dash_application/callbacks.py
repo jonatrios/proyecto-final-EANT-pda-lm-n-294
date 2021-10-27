@@ -143,6 +143,9 @@ def register_callback(dash_app):
         elif pathname == '/contaminantes':
             #return html.H2(["Emisiones contaminantes",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-left")
             return html.H3(["Contaminantes 2020 (-28 %)",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-center")
+        elif pathname == '/estaciones':
+            #return html.H2(["Emisiones contaminantes",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-left")
+            return html.H3(["Contaminantes 2020 (-28 %)",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-center")
 
         # If the user tries to reach a different page, return a 404 message
         return dbc.Jumbotron(

@@ -44,7 +44,7 @@ sidebar = html.Div(
         html.Hr(),
         html.P(
             #"Cada boton representa el analisis realizado de un dataset", className="lead"
-            "Python Data Analytics - pda-lm-n-294 - Grupo 1", className="lead"
+            "Python Data Analytics pda-lm-n-294 - Grupo 1", className="lead"
         ),
         dbc.Nav(
             [

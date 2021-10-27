@@ -46,6 +46,10 @@ sidebar = html.Div(
             #"Cada boton representa el analisis realizado de un dataset", className="lead"
             "Python Data Analytics - pda-lm-n-294 - Grupo 1", className="lead"
         ),
+        html.P(
+            #"Cada boton representa el analisis realizado de un dataset", className="lead"
+            "Python Data Analytics - pda-lm-n-294 - Grupo 1", className="lead"
+        ),
         dbc.Nav(
             [
                 dbc.NavLink("Inicio", href="/dash/", active="exact"),

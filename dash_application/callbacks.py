@@ -186,7 +186,7 @@ def register_callback(dash_app):
             return html.H3(["Viajes en Vehículos 2020 (-10 %)",html.Hr(),html.Br()] + bar_fig(df_vehiculos,'MES','TOTAL', 'MES',"dash_application/assets/VEHICULOS.png",1000), className="text-center")
         elif pathname == '/contaminantes':
             #return html.H2(["Emisiones contaminantes",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-left")
-            return html.H3(["Contaminantes 2020 (-28 %)",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-center")
+            return html.H3(["Contaminantes 2020 (-28 %)",html.Hr(),html.Br()] + map_and_bar(df_cont,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-center")
         elif pathname == '/estaciones':
             #return html.H2(["Emisiones contaminantes",html.Hr(),html.Br()] + map_and_bar(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-left")
             return html.H3( map_and_bar_map(df_vehiculos,df_estaciones,'MES','TOTAL', 'Y','X','MES',1) , className="text-center")

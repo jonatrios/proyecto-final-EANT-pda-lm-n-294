@@ -1,6 +1,7 @@
 from flask import render_template
 from flask.views import MethodView
 from flask_server import appbuilder
+from flask_server import redirect
 
 
 class HelloMethodView(MethodView):

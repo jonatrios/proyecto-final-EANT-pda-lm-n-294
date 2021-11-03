@@ -81,7 +81,7 @@ def cache_data(resource:str) -> list:
         f = [ line.decode('utf-8') for line in r.iter_lines()]
         print(f[0])
         headers = ['id'] + f[0].split(',')
-        reader = csv.DictReader(f, delimiter=',', quotechar='"')
+        reader = csv.DictReader(f, delimiter=';' if ';' in f[0] else ',', quotechar='"')
         
         for row in reader:
             file_data.append(row)

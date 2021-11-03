@@ -43,7 +43,7 @@ CARD_TEXT_STYLE = {
 
 sidebar = html.Div(
     [
-        html.H2([html.A(html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode())), href="https://proyecto-final-eant-2021.herokuapp.com/dash/", title='Inicio')], className="rounded mx-auto d-block"),
+        html.H2([html.A(html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode())), href="/", title='Inicio')], className="rounded mx-auto d-block"),
         html.Hr(),
         html.P(
             #"Cada boton representa el analisis realizado de un dataset", className="lead"

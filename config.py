@@ -22,7 +22,8 @@ class Config():
     "ru": {"flag": "ru", "name": "Russian"},
     }
     APP_THEME = "flatly.css"
-    APP_NAME = "EANT-DA-PROYECTO-FINAL"
+    #APP_NAME = "EANT-DA-PROYECTO-FINAL"
+    APP_NAME = "pda-lm-n-294-1"
     AUTH_TYPE = 1
     AUTH_ROLE_ADMIN = "Admin"
     AUTH_ROLE_PUBLIC = "Public"

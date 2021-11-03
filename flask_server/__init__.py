@@ -34,7 +34,8 @@ class CreateApp():
         from dash_application.layout import layout as dash_layout
         register_dash_app(
             flask_server=app,
-            title='EANT-DA-PROYECTO-FINAL',
+            #title='EANT-DA-PROYECTO-FINAL',
+            title='pda-lm-n-294-1',
             base_pathname='/dash/',
             layout=dash_layout,
             register_callbacks_funcs=[dash_callback]

@@ -12,7 +12,6 @@ class HelloMethodView(MethodView):
 
 
 
-
 class ReadMeMethoView(MethodView):
 
     def get(self):

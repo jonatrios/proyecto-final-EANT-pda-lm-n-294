@@ -13,6 +13,9 @@ encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 image_opendata = "dash_application/assets/logopng.png"
 encoded_opendata = base64.b64encode(open(image_opendata, 'rb').read())
 
+image_ba_data = "dash_application/assets/ba_data.jpg"
+encoded_ba_data = base64.b64encode(open(image_ba_data, 'rb').read())
+
 # the style arguments for the sidebar. We use position:fixed and a fixed width
 SIDEBAR_STYLE = {
     "position": "fixed",
@@ -40,10 +43,11 @@ CARD_TEXT_STYLE = {
 
 sidebar = html.Div(
     [
-        html.H2([html.A(html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode())), href="/", title='Volver al inicio')], className="rounded mx-auto d-block"),
+        html.H2([html.A(html.Img(src='data:image/png;base64,{}'.format(encoded_image.decode())), href="https://proyecto-final-eant-2021.herokuapp.com/dash/", title='Inicio')], className="rounded mx-auto d-block"),
         html.Hr(),
         html.P(
-            "Cada boton representa el analisis realizado de un dataset", className="lead"
+            #"Cada boton representa el analisis realizado de un dataset", className="lead"
+            ["Python Data Analytics",html.Br(),"pda-lm-n-294",html.Br(),"Grupo 1"], className="lead"
         ),
         dbc.Nav(
             [
@@ -52,8 +56,12 @@ sidebar = html.Div(
                 dbc.NavLink("Subtes", href="/subte", active="exact"),
                 dbc.NavLink("Vehiculos", href="/vehiculos", active="exact"),
                 dbc.NavLink("Contaminantes", href="/contaminantes", active="exact"),
+                dbc.NavLink("Estaciones Ambientales", href="/estaciones", active="exact"),
+                dbc.NavLink("GitHub (App)", href="https://github.com/jonatrios/proyecto-final-EANT-pda-lm-n-294", active="exact"),
+                dbc.NavLink("GitHub (Data)", href="https://github.com/fernandorgonzalez/cursos-eant-python_data_analytics-proyecto#readme", active="exact"),
                 
-                html.Img(src='data:image/png;base64,{}'.format(encoded_opendata.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=200, height=100)
+                #html.Img(src='data:image/png;base64,{}'.format(encoded_opendata.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=200, height=100)
+                #html.Img(src='data:image/png;base64,{}'.format(encoded_ba_data.decode()), className="img-responsive center-block", style={'position':'absolute', 'bottom':0}, width=202, height=202)
             ], 
             vertical=True,
             pills=True,

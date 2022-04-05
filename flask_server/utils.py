@@ -13,8 +13,12 @@ def get_info(group,organization, tags, page):
         soup = BeautifulSoup(req, features='html.parser')
 
         filter_container = soup.find('div', class_='filters-container col-md-4')
-
-        g = filter_container.find_all('div', class_='search-filter')
+        try:
+            
+            g = filter_container.find_all('div', class_='search-filter')
+            
+        except AttributeError:
+            return {'message': 'page not found'}
 
         g = g[1:]
 
